@@ -161,7 +161,7 @@ def ProcessUMapExport(export:Export, cfg:UMapImportSettings):
                     if not cfg.cubemaps: return
                     export.ReadProperties(False)
 
-                    probe = bpy.data.lightprobes.new(export.object_name, 'CUBE')
+                    probe = bpy.data.lightprobes.new(export.object_name, 'SPHERE')
                     probe.influence_type = 'BOX'
                     probe.influence_distance = 1
 
@@ -172,7 +172,7 @@ def ProcessUMapExport(export:Export, cfg:UMapImportSettings):
                     TryApplyRootComponent(export, obj, def_scale=FVector(1000,1000,400), scale=0.01)
 
                     if cfg.lightprobes:
-                        irr = bpy.data.lightprobes.new(export.object_name, 'GRID')
+                        irr = bpy.data.lightprobes.new(export.object_name, 'VOLUME')
                         irr.influence_distance = 1 / (1 - probe.falloff) - 1
                         obj2 = SetupObjectFull(cfg, export, irr, f"{export.object_name}_irridance")
                         TryApplyRootComponent(export, obj2, def_scale=FVector(1000,1000,400), scale=0.01*(1 - probe.falloff))
@@ -180,7 +180,7 @@ def ProcessUMapExport(export:Export, cfg:UMapImportSettings):
                     if not cfg.cubemaps: return
                     export.ReadProperties(False)
 
-                    probe = bpy.data.lightprobes.new(export.object_name, 'CUBE')
+                    probe = bpy.data.lightprobes.new(export.object_name, 'SPHERE')
                     probe.influence_type = 'ELIPSOID'
                     if cap_comp := export.properties.TryGetProperties('CaptureComponent'): probe.influence_distance = cap_comp.TryGetValue('InfluenceRadius', 3000) * 0.01
                     

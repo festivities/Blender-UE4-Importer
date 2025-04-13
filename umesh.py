@@ -134,7 +134,7 @@ def ReadMeshBulkData(self:Export, asset:UAsset, f:uasset.ByteStream): # FByteBul
         mesh.name = self.object_name
         bmsh.to_mesh(mesh)
         if has_normals: mesh.normals_split_custom_set(spl_norms)
-        mesh.use_auto_smooth = True
+        #mesh.use_auto_smooth = True
         mesh.transform(Matrix.Identity(4) * 0.01)
         mesh["UAsset"] = self.asset.f.byte_stream.name
         # TODO: flip_normals() faster?
@@ -463,7 +463,7 @@ def ImportSkeletalMesh(self:Export, import_materials=True, o=None):
 
             bmsh.to_mesh(mesh)
             #mesh.normals_split_custom_set(spl_norms)
-            mesh.use_auto_smooth = True
+            #mesh.use_auto_smooth = True
             mesh.transform(Matrix.Identity(4) * 0.01)
 
             for poly in mesh.polygons: poly.use_smooth = True
